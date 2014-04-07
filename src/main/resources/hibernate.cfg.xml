@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ebanking?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">1234</property>
+    <!-- JDBC connection pool (use the built-in) -->
+    <property name="connection.pool_size">1</property>
+    <!-- Enable Hibernate's automatic session context management -->
+    <property name="current_session_context_class">thread</property>
+    <!-- Disable the second-level cache  -->
+    <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+    <property name="show_sql">true</property>
+    <property name="hbm2ddl.auto">update</property>
+    
+    <!-- List of Class mapping files   -->
+    <mapping class="com.example.ebanking.model.Account"/>
+    <mapping class="com.example.ebanking.model.ChequingAccount"/>
+    <mapping class="com.example.ebanking.model.SavingAccount"/>
+    <mapping class="com.example.ebanking.model.InvestmentAccount"/>
+    <mapping class="com.example.ebanking.model.CreditAccount"/>
+    <mapping class="com.example.ebanking.model.PayeeAccount"/>
+    
+    <mapping class="com.example.ebanking.model.Payee"/>
+    
+      <mapping class="com.example.ebanking.model.CreditPlan"/>
+    
+    <mapping class="com.example.ebanking.model.Transaction"/>
+    
+    <mapping class="com.example.ebanking.model.Address"/>
+
+    <mapping class="com.example.ebanking.model.User"/>
+    <mapping class="com.example.ebanking.model.Client"/>
+    <mapping class="com.example.ebanking.model.Employee"/>
+    
+    <mapping class="com.example.ebanking.model.ClientCard"/>
+    
+    <mapping class="com.example.ebanking.model.InvestmentPlan"/>
+    <mapping class="com.example.ebanking.model.OpenTermInvestment"/>
+    <mapping class="com.example.ebanking.model.ClosedTermInvestment"/>
+
+     <mapping class="com.example.ebanking.model.Role"/>
+     <mapping class="com.example.ebanking.model.UserRole"/>   
+    
+  </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Default Header</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <header id="topheader">
+                <div id="logo">
+                    <div style="margin-top: 50px; color: #FFF;font-size: x-large;padding-left: 62px;" pxclass="whitetitle">
+                        <strong>Online </strong><strong>Banking </strong><br/>
+                        <strong>System</strong>
+                    </div>
+                </div>
+                <div id="toplinks" class="smallgraytext">
+                    <h:form rendered="#{not empty request.remoteUser}">
+                        <h:commandLink value="Logout" action="#{loginBean.logout}" /> |
+                        <h:link value="Accounts" outcome="/accounts" />
+                    </h:form>
+                    <h:link value="Login" outcome="index" rendered="#{empty request.remoteUser}" /> | <a href="mailto:obs.inse620@gmail.com?Subject=Need%20Help" target="_top">
+                        Contact Us</a>
+                </div>
+            </header>
+            <div>
+
+            </div>
+        </ui:composition>
+    </h:body>
+</html>
+

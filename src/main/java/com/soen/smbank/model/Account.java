@@ -33,6 +33,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 
+
 @Entity
 @Table
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -58,10 +59,10 @@ public class Account implements Serializable {
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime openedDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Client client;
 
-    @OneToMany(mappedBy = "sourceAccount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sourceAccount",fetch = FetchType.EAGER)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Transaction> sourceTransactions;
 
@@ -219,8 +220,8 @@ public class Account implements Serializable {
         try {
             this.updateAccount();
             isDone = true;
-            String transactionDescription= "Withdraw: " + description;
-            Transaction tr = new Transaction(this, amount, 0, transactionDescription);
+            
+            Transaction tr = new Transaction(this, amount, 0, description);
             tr.saveTransaction();
         } catch (Exception e) {
             return false;
@@ -237,8 +238,7 @@ public class Account implements Serializable {
         try {
             this.updateAccount();
             isDone = true;
-            String transactionDescription= "Deposite: " + description;
-            Transaction tr = new Transaction(this, 0, amount,  transactionDescription);
+            Transaction tr = new Transaction(this, 0, amount,  description);
             tr.saveTransaction();
         } catch (Exception e) {
             return false;
@@ -267,8 +267,9 @@ public class Account implements Serializable {
                 String transactionDescription= "Transfer From: " + description;
                 Transaction sourceTransaction = new Transaction(sourceAccount, amount, 0, transactionDescription);
                 transactionDescription= "Transfer To: " + description;
-                Transaction targetTransaction = new Transaction(targetAccount, 0, amount, transactionDescription);
                 sourceTransaction.saveTransaction();
+               
+                Transaction targetTransaction = new Transaction(targetAccount, 0, amount, transactionDescription);
                 targetTransaction.saveTransaction();
             } catch (Exception e) {
                 return false;

@@ -35,11 +35,11 @@ public class Client extends User implements Serializable {
     @Column
     private long age;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Account> accounts;
 
-    @OneToMany(mappedBy = "relatedClient", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "relatedClient")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ClientCard> clientCards;
 

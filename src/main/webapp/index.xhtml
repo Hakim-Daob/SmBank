@@ -22,18 +22,20 @@
                 <h:form>
                     <table>
                         <tr>
-                            <th>Account Number:</th>                  
+                            <th><h4>Account Number</h4> </th>                  
                             <td><h:inputText id="accountNumberInput" value="#{loginBean.accountNumber}" 
-                                             required="true" class="input-block-level" /></td>
+                                             required="true" class="form-control col-lg-8" /></td>
                         </tr>
+                        <br/>
                         <tr>
-                            <th>Password:</th>
+                            <th><h4>Password</h4> </th>
                             <td><h:inputSecret id="passwordInput" value="#{loginBean.password}" 
-                                               required="true" class="input-block-level"/></td>
+                                               required="true" class="form-control col-lg-8"/></td>
                         </tr>
+                        <br/>
                         <tr>
                             <td></td>
-                            <td><span><h:commandButton action="#{loginBean.login}" value="Login" type="button" class="btn btn-success"/></span></td>
+                            <td><h:commandButton action="#{loginBean.login}" value="Login"  class="btn btn-success"/></td>
                                                  
                                                 
 						   		

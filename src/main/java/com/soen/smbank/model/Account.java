@@ -221,7 +221,7 @@ public class Account implements Serializable {
             this.updateAccount();
             isDone = true;
             
-            Transaction tr = new Transaction(this, amount, 0, description);
+            Transaction tr = new Transaction(this, amount, 0,"Withdrawl: "+ description);
             tr.saveTransaction();
         } catch (Exception e) {
             return false;
@@ -238,7 +238,7 @@ public class Account implements Serializable {
         try {
             this.updateAccount();
             isDone = true;
-            Transaction tr = new Transaction(this, 0, amount,  description);
+            Transaction tr = new Transaction(this, 0, amount,  "Deposit:"+description);
             tr.saveTransaction();
         } catch (Exception e) {
             return false;
@@ -264,9 +264,9 @@ public class Account implements Serializable {
                 targetAccount.updateAccount();
 
                 isDone = true;
-                String transactionDescription= "Transfer From: " + description;
+                String transactionDescription= "Transfer:" + description;
                 Transaction sourceTransaction = new Transaction(sourceAccount, amount, 0, transactionDescription);
-                transactionDescription= "Transfer To: " + description;
+                transactionDescription=  description;
                 sourceTransaction.saveTransaction();
                
                 Transaction targetTransaction = new Transaction(targetAccount, 0, amount, transactionDescription);

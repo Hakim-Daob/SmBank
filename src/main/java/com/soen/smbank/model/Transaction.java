@@ -58,7 +58,11 @@ public class Transaction implements Serializable {
         this.sourceAccount = sourceAccount;
         this.description = description;
         this.debit = debit;
+        if (this.debit == 0 ){
+        this.formattedDebit = formatDoubleToCurrency(-1*debit);
+        }else{
         this.formattedDebit = formatDoubleToCurrency(debit);
+        }
         this.credit = credit;
         this.formattedCredit = formatDoubleToCurrency(credit);
         this.transactionTime = DateTime.now();

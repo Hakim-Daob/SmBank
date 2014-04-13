@@ -7,15 +7,20 @@
     <h:head>
         <title>Accounts</title>
         <link rel="stylesheet" href="/eBanking/css/style.css" type="text/css" />
+           <link rel="stylesheet" href="/smBanking/css/style.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/lightbox.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/responsiveslides.css" type="text/css" />
+         <link rel="stylesheet" href="/smBanking/css/bootstrap.css" type="text/css" /> 
+        
     </h:head>
     <h:body>
         <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
         </ui:insert>
-        <!-- <ui:insert name="left-panel" >
-                    <ui:include src="/template/left_panel.xhtml" />
-                </ui:insert> -->
-        <div id="contenttext" style="width: 800px; font-size: 13px; padding:148px;">
+        <ui:insert name="user_menu" >
+                    <ui:include src="/template/user_menu.xhtml" />
+         </ui:insert> 
+        <div id="contenttext" style="width: 1024px; font-size: 13px; padding:30px;">
             <div class="bodytext" style="padding:20px;">
                 <h3 align="left" style="color:#CC0000"><strong>My Account Summary</strong></h3>
                 <ul>
@@ -23,7 +28,7 @@
                     <br />
                     <h:form>
                         <h:dataTable value="#{accountsBean.personalAccountsList}" var="account"
-                                     styleClass="order-table"
+                                     styleClass="table-responsive"
                                      headerClass="order-table-header"
                                      rowClasses="order-table-odd-row,order-table-even-row">
                             <h:column>

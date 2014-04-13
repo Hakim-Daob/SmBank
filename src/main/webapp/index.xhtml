@@ -5,7 +5,11 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Login - Online Banking System</title>
-        <link rel="stylesheet" href="/eBanking/css/style.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/style.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/lightbox.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/responsiveslides.css" type="text/css" />
+         <link rel="stylesheet" href="/smBanking/css/bootstrap.css" type="text/css" />   
+         
     </h:head>
     <h:body>
         <div id="header">
@@ -29,8 +33,11 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td><h:commandButton value="Login" 
-                                                 action="#{loginBean.login}" class="btn btn-primary"/></td>
+                            <td><span><h:commandButton action="#{loginBean.login}" value="Login" type="button" class="btn btn-success"/></span></td>
+                                                 
+                                                
+						   		
+						  
                         </tr>
                     </table><br/>
                 </h:form>

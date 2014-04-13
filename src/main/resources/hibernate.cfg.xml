@@ -4,7 +4,7 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/smbank?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/smbanking?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">1234</property>
     <!-- JDBC connection pool (use the built-in) -->
@@ -15,7 +15,6 @@
     <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
     <property name="show_sql">true</property>
     <property name="hbm2ddl.auto">update</property>
-    
     <!-- List of Class mapping files   -->
     <mapping class="com.soen.smbank.model.Account"/>
     <mapping class="com.soen.smbank.model.ChequingAccount"/>
@@ -23,27 +22,18 @@
     <mapping class="com.soen.smbank.model.InvestmentAccount"/>
     <mapping class="com.soen.smbank.model.CreditAccount"/>
     <mapping class="com.soen.smbank.model.PayeeAccount"/>
-    
     <mapping class="com.soen.smbank.model.Payee"/>
-    
-      <mapping class="com.soen.smbank.model.CreditPlan"/>
-    
+    <mapping class="com.soen.smbank.model.CreditPlan"/>
     <mapping class="com.soen.smbank.model.Transaction"/>
-    
     <mapping class="com.soen.smbank.model.Address"/>
-
     <mapping class="com.soen.smbank.model.User"/>
     <mapping class="com.soen.smbank.model.Client"/>
     <mapping class="com.soen.smbank.model.Employee"/>
-    
     <mapping class="com.soen.smbank.model.ClientCard"/>
-    
     <mapping class="com.soen.smbank.model.InvestmentPlan"/>
     <mapping class="com.soen.smbank.model.OpenTermInvestment"/>
     <mapping class="com.soen.smbank.model.ClosedTermInvestment"/>
-
-     <mapping class="com.soen.smbank.model.Role"/>
-     <mapping class="com.soen.smbank.model.UserRole"/>   
-    
+    <mapping class="com.soen.smbank.model.Role"/>
+    <mapping class="com.soen.smbank.model.UserRole"/>
   </session-factory>
 </hibernate-configuration>

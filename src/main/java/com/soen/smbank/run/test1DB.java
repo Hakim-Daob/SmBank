@@ -21,37 +21,41 @@ public class test1DB {
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
 
-        Client cl = new Client();
-        cl.setFirstName("FirstName2");
-        cl.setLastName("LastName2");
-        cl.setAge(99);
-        cl.setEmail("a@b.com");
-        cl.setGender("Male");
-        cl.setUserName("01234567890");
-        cl.setPassword("1234");
-        cl.setPhoneNumber("514-000-9999");
-        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
-        cl.saveUser();
+//        Client cl = new Client();
+//        cl.setFirstName("FirstName2");
+//        cl.setLastName("LastName2");
+//        cl.setAge(99);
+//        cl.setEmail("a@b.com");
+//        cl.setGender("Male");
+//        cl.setUserName("01234567890");
+//        cl.setPassword("1234");
+//        cl.setPhoneNumber("514-000-9999");
+//        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
+//        cl.saveUser();
 ////
-//         // cl = Client.getClientsById(1);
+//        Client cl = Client.getClientsById(1);
 //        ChequingAccount ca = new ChequingAccount();
 //        ca.setAccountNumber("Check001");
-//        ca.setBalance(50000);
+//        ca.setBalance(5000);
 //        ca.setOpenedDate(DateTime.now());
 //        ca.setClient(cl);
+//        ca.saveAccount();
 ////
 //        SavingAccount sa = new SavingAccount();
 //        sa.setAccountNumber("Saving001");
-//        sa.setBalance(50000);
+//        sa.setBalance(1000);
 //        sa.setOpenedDate(DateTime.now());
 //        sa.setClient(cl);
+//        sa.saveAccount();
 ////
 //        List<Account> accounts = new ArrayList<Account>();
 //        accounts.add(sa);
 //        accounts.add(ca);
 ////
 //        cl.setAccounts(accounts);
-//         cl.saveUser();
+//         cl.updateUser();
+         
+         
         
 //        Client cl2 = Client.getClientsById(8);
 //        
@@ -203,5 +207,10 @@ public class test1DB {
 //        Client client = Client.getClientByAccountNumber("12-AA-56");
 //        ArrayList<Account> allAccounts = Account.getAllClientAccounts(client.getUserId());
 //        System.out.println("=====>" + allAccounts);
+        
+           SavingAccount sa = SavingAccount.getSavingAccountById(2);
+        ChequingAccount ca = ChequingAccount.getCheckingAccountById(1);
+        
+        Account.transfer(ca, sa, 100, "Paying my load");
     }
 }

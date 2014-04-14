@@ -29,12 +29,11 @@
                     <h:form>
                         <p>
                             <h:dataTable value="#{accountsBean.personalAccountsList}" var="account"
-                                         styleClass="table-bordered table-responsive"
+                                         styleClass="table-responsive"
                                          headerClass="order-table-header"
                                          rowClasses="order-table-odd-row,order-table-even-row">
                                 <h:column>
-                                    <f:facet name="header">Account Number   <p> 
-                                        </p></f:facet>
+                                    <f:facet name="header">Account Number</f:facet>
                                         #{account.accountNumber} 
                                 </h:column>
                                 <h:column>       
@@ -50,14 +49,10 @@
                                 </h:column>
 
                                 <h:column>
-                                    <h:commandLink value="More Details..." action="#{accountsBean.naviagateToAccount}" >
-
+                                    <h:commandButton value="View Summary" action="#{accountsBean.naviagateToAccount}" >
                                         <f:param name="selectedAccountId" value="#{account.accountId}" />
-
-                                    </h:commandLink>
-                                   
+                                    </h:commandButton>
                                 </h:column>
-                                 
                             </h:dataTable>
                         </p>
                         <p><br />

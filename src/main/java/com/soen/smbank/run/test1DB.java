@@ -21,17 +21,17 @@ public class test1DB {
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
 
-//        Client cl = new Client();
-//        cl.setFirstName("FirstName2");
-//        cl.setLastName("LastName2");
-//        cl.setAge(99);
-//        cl.setEmail("a@b.com");
-//        cl.setGender("Male");
-//        cl.setUserName("01234567890");
-//        cl.setPassword("1234");
-//        cl.setPhoneNumber("514-000-9999");
-//        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
-//        cl.saveUser();
+        Client cl = new Client();
+        cl.setFirstName("jh");
+        cl.setLastName("jf");
+        cl.setAge(99);
+        cl.setEmail("ff");
+        cl.setGender("Male");
+        cl.setUserName("01234567890");
+        cl.setPassword("12");
+        cl.setPhoneNumber("514-9999");
+        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
+        cl.saveUser();
 ////
 //        Client cl = Client.getClientsById(1);
 //        ChequingAccount ca = new ChequingAccount();
@@ -208,10 +208,10 @@ public class test1DB {
 //        ArrayList<Account> allAccounts = Account.getAllClientAccounts(client.getUserId());
 //        System.out.println("=====>" + allAccounts);
         
-        SavingAccount sa = SavingAccount.getSavingAccountById(2);
-        ChequingAccount ca = ChequingAccount.getCheckingAccountById(1);
-        
-        Account.transfer(ca, sa, 100, "Paying my load");
+//        SavingAccount sa = SavingAccount.getSavingAccountById(2);
+//        ChequingAccount ca = ChequingAccount.getCheckingAccountById(1);
+//        
+//        Account.transfer(ca, sa, 100, "Paying my load");
          
          
     }

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Make A Transfer</title>
+        <link rel="stylesheet" href="/smBanking/css/style.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/lightbox.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/responsiveslides.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/bootstrap.css" type="text/css" />
+    </h:head>
+    <h:body>
+        <ui:insert name="header" >
+            <ui:include src="/template/header.xhtml" />
+        </ui:insert>
+         <ui:insert name="user_menu" >
+                <ui:include src="/template/user_menu.xhtml" />
+         </ui:insert> 
+         <ui:insert name="transaction_submenu" >
+                <ui:include src="/template/transaction_submenu.xhtml" />
+         </ui:insert>
+        
+        <div id="contenttext" style="width: 800px; font-size: 13px; padding: 148px; font-family: Verdana, Geneva, sans-serif; color: #6C0; font-weight: bold;">
+            <legend>
+                <h2 class="largeredtext">Transfer Funds</h2>
+            </legend>
+            <h:form>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><h4>Amount:</h4></td>
+                            <td>
+                                <h:inputText class="form-control" id="inputDefault" value="#{transferBean.amountToTransfer}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h4>Source Account:    </h4></td>
+                            <td>
+                                <h:selectOneMenu class="form-control" value="#{transferBean.fromAccount}" required="true" onchange="submit()" valueChangeListener="#{transferBean.selectAccount}">
+                                    <f:selectItems value="#{transferBean.fromAccounts}" />
+                                </h:selectOneMenu>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td><h4>Target Account:     </h4></td>
+                            <td>
+                                <h:selectOneMenu class="form-control" value="#{transferBean.toAccount}">
+                                    <f:selectItems value="#{transferBean.toAccounts}" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                       
+                        
+                        <tr>
+                            
+                            <td>
+                                 <p>
+                            <br> </br>
+                        </p>
+                                <h:commandButton value="Transfer" class="btn btn-success btn-lg"
+                                                 action="#{transferBean.transferAmount}" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </h:form>
+        </div>
+        
+        <ui:insert name="footer">
+            <ui:include src="/template/footer.xhtml" />
+        </ui:insert>
+    </h:body>
+</html>
+

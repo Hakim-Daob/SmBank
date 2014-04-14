@@ -8,6 +8,7 @@ package com.soen.smbank.bean;
 import com.soen.smbank.model.Account;
 import com.soen.smbank.model.ChequingAccount;
 import com.soen.smbank.model.InvestmentAccount;
+import com.soen.smbank.model.PayeeAccount;
 import com.soen.smbank.model.SavingAccount;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,12 +21,12 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean
 @RequestScoped
-public class AccountSummary {
+public class InvestmentSummaryBean {
 
     /**
      * Creates a new instance of AccountSummary
      */
-    public AccountSummary() {
+    public InvestmentSummaryBean() {
     }
 
     private Account selectedAccount;
@@ -56,6 +57,8 @@ public class AccountSummary {
             accountTypeInferred = "Saving";
         } else if (selectedAccount instanceof InvestmentAccount) {
             accountTypeInferred = "Investment";
+        }else if (selectedAccount instanceof PayeeAccount) {
+            accountTypeInferred = "Payee";
         }
         return accountTypeInferred;
     }

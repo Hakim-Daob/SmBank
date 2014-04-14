@@ -54,7 +54,7 @@ public class test1DB {
 ////
 //        cl.setAccounts(accounts);
 //         cl.updateUser();
-//         
+         
          
         
 //        Client cl2 = Client.getClientsById(8);
@@ -208,10 +208,21 @@ public class test1DB {
 //        ArrayList<Account> allAccounts = Account.getAllClientAccounts(client.getUserId());
 //        System.out.println("=====>" + allAccounts);
         
-//        SavingAccount sa = SavingAccount.getSavingAccountById(2);
-//        ChequingAccount ca = ChequingAccount.getCheckingAccountById(1);
-//        
-//        Account.transfer(ca, sa, 100, "Paying my load");
+        Client cl2= Client.getClientsById(1);
+        if (cl2 == null)
+            System.out.println("Client is null");
+        
+        
+        ChequingAccount ca = ChequingAccount.getCheckingAccountById(1);
+        SavingAccount sa = SavingAccount.getSavingAccountById(2);
+    
+//     
+        if (sa == null)
+            System.out.println("Saving is null");
+        if (ca == null)
+            System.out.println("Chequing is null");
+        else
+            Account.transfer(ca, sa, 1000, "Paying my load");
          
          
     }

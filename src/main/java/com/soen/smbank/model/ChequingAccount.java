@@ -11,15 +11,21 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
  
 @Entity
 @Table
 @PrimaryKeyJoinColumn(name = "accountId")
+
 public class ChequingAccount extends Account implements Serializable {
+
+   
 
     @Override
     public long saveAccount() {

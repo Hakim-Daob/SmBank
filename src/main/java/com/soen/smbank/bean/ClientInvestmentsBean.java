@@ -75,6 +75,6 @@ public class ClientInvestmentsBean {
         Map<String,String> parameters = context.getExternalContext().getRequestParameterMap();
         HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
         session.setAttribute("selectedAccountId", parameters.get("selectedAccountId"));
-        return "InvestmentSummary";
+        return "investmentSummary";
     }
 }

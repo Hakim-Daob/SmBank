@@ -21,17 +21,17 @@ public class test1DB {
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
 
-        Client cl = new Client();
-        cl.setFirstName("jh");
-        cl.setLastName("jf");
-        cl.setAge(99);
-        cl.setEmail("ff");
-        cl.setGender("Male");
-        cl.setUserName("01234567890");
-        cl.setPassword("12");
-        cl.setPhoneNumber("514-9999");
-        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
-        cl.saveUser();
+//        Client cl = new Client();
+//        cl.setFirstName("jh");
+//        cl.setLastName("jf");
+//        cl.setAge(99);
+//        cl.setEmail("ff");
+//        cl.setGender("Male");
+//        cl.setUserName("01234567890");
+//        cl.setPassword("12");
+//        cl.setPhoneNumber("514-9999");
+//        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
+//        cl.saveUser();
 ////
 //        Client cl = Client.getClientsById(1);
 //        ChequingAccount ca = new ChequingAccount();

@@ -6,7 +6,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Accounts</title>
-        <!--<link rel="stylesheet" href="/eBanking/css/style.css" type="text/css" />-->
         <link rel="stylesheet" href="/smBanking/css/style.css" type="text/css" />
         <link rel="stylesheet" href="/smBanking/css/lightbox.css" type="text/css" />
         <link rel="stylesheet" href="/smBanking/css/responsiveslides.css" type="text/css" />
@@ -62,26 +61,7 @@
                         </p>
                         <p><br />
                         </p>
-                        <li style="float:left">Investments</li>
                         <br />
-                        <h:dataTable value="#{accountsBean.investmentAccountsList}" var="account"
-                                     styleClass="order-table"
-                                     headerClass="order-table-header"
-                                     rowClasses="order-table-odd-row,order-table-even-row">
-                            <h:column>
-                                <f:facet name="header">Number</f:facet>
-                                    #{account.accountNumber}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Balance</f:facet>
-                                    #{account.balance}
-                            </h:column>
-                            <h:column>
-                                <h:commandButton value="View Summary" action="#{accountsBean.naviagateToAccount}" >
-                                    <f:param name="selectedAccountId" value="#{account.accountId}" />
-                                </h:commandButton>
-                            </h:column>
-                        </h:dataTable>
                     </h:form>
                 </ul>
             </div>

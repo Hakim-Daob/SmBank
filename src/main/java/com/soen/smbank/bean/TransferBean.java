@@ -109,7 +109,7 @@ public class TransferBean {
     public String transferAmount() {
         Account fromAccountObj = Account.getAccountById(fromAccount);
         Account toAccountObj = Account.getAccountById(toAccount);
-        if (Account.transfer(fromAccountObj, toAccountObj, amountToTransfer,  fromAccountObj.getAccountNumber())) {
+        if (Account.transfer(fromAccountObj, toAccountObj, amountToTransfer, ""+ fromAccountObj.getAccountNumber())) {
             return "transfer";
         }
         return "loginError";

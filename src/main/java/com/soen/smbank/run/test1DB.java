@@ -221,8 +221,17 @@ public class test1DB {
             System.out.println("Saving is null");
         if (ca == null)
             System.out.println("Chequing is null");
-        else
-            Account.transfer(ca, sa, 1000, "Paying my load");
+        else{
+            System.out.println("Before: Chequing Balance = " + ca.getBalance());
+             System.out.println("Before: Saving Balance = " + sa.getBalance());
+             Account.transfer(ca, sa, 1000, "Paying my load");
+             System.out.println("After: Chequing Balance = " + ca.getBalance());
+             System.out.println("After: Saving Balance = " + sa.getBalance());
+        }
+           
+        
+        
+        
          
          
     }

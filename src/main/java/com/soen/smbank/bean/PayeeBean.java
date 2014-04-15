@@ -20,10 +20,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 
-/**
- *
- * @author PradeepSamuel
- */
 @ManagedBean
 @RequestScoped
 public class PayeeBean {

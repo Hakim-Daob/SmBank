@@ -14,6 +14,7 @@ import com.soen.smbank.model.SavingAccount;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -110,6 +111,8 @@ public class TransferBean {
         Account fromAccountObj = Account.getAccountById(fromAccount);
         Account toAccountObj = Account.getAccountById(toAccount);
         if (Account.transfer(fromAccountObj, toAccountObj, amountToTransfer, ""+ fromAccountObj.getAccountNumber())) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage("displaytransfer", new FacesMessage("A Succesfull Transfer Completed"));
             return "transfer";
         }
         return "loginError";

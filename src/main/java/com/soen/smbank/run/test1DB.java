@@ -227,10 +227,7 @@ public class test1DB {
              Account.transfer(ca, sa, 1000, "Paying my load");
              System.out.println("After: Chequing Balance = " + ca.getBalance());
              System.out.println("After: Saving Balance = " + sa.getBalance());
-        }
-           
-        
-        
+        } 
         
          
          

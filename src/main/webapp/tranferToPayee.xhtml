@@ -5,61 +5,64 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Withdrawal Funds</title>
-        <link rel="stylesheet" href="/smBanking/css/style.css" type="text/css" /> <link rel="stylesheet" href="/smBanking/css/lightbox.css" type="text/css" />
+        <title>Transfer To Payee</title>
+        < <link rel="stylesheet" href="/smBanking/css/style.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/lightbox.css" type="text/css" />
         <link rel="stylesheet" href="/smBanking/css/responsiveslides.css" type="text/css" />
-        <link rel="stylesheet" href="/smBanking/css/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="/smBanking/css/bootstrap.css" type="text/css" /> 
     </h:head>
     <h:body>
         <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
         </ui:insert>
-        <ui:insert name="user_menu" >
-                <ui:include src="/template/user_menu.xhtml" />
-         </ui:insert> 
-         <ui:insert name="transaction_submenu" >
-                <ui:include src="/template/transaction_submenu.xhtml" />
-         </ui:insert>
+         <ui:insert name="user_menu" >
+            <ui:include src="/template/user_menu.xhtml" />
+        </ui:insert>
+         <ui:insert name="payee_submenu" >
+            <ui:include src="/template/payee_submenu.xhtml" />
+        </ui:insert>
         <div id="contenttext" style="width: 800px; font-size: 13px; padding:148px;">
             <legend>
-                <h2 class="largeredtext">Withdrawal Funds</h2>
+                <h2 class="largeredtext">Pay Bills</h2>
             </legend>
             <h:form>
                 <table>
                     <tbody>
                         <tr>
-                            <td>Withdraw From:</td>
+                            <td>From</td>
                             <td>
-                                <h:selectOneMenu value="#{transferBean.fromAccount}">
+                                <h:selectOneMenu value="#{transferBean.fromAccount}" required="true">
                                     <f:selectItems value="#{transferBean.fromAccounts}" />
                                 </h:selectOneMenu>
                             </td>
                         </tr>
                         <tr>
-                            <td>Address:</td>
+                            <td>Selected Payee</td>
                             <td>
-                                <h:inputText id="addressInput" value="#{transferBean.toAddress}" />
+                                #{transferBean.selectedPayeeAccountName}
                             </td>
                         </tr>
                         <tr>
-                            <td>Amount:</td>
+                            <td>Amount</td>
                             <td>
                                 <h:inputText id="amountInput" value="#{transferBean.amountToTransfer}" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <h:commandButton value="Withdraw" 
-                                                 action="#{transferBean.withdrawAmount}" />
+                                <h:commandButton value="Pay Bill" 
+                                                 action="#{transferBean.payBill}" />
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </h:form>
         </div>
-        <ui:insert name="footer">
-            <ui:include src="/template/footer.xhtml" />
-        </ui:insert>
+        <div id="leftpannel">
+            <ui:insert name="left-panel" >
+                <ui:include src="/template/left_panel.xhtml" />
+            </ui:insert> 
+        </div>
     </h:body>
 </html>
 

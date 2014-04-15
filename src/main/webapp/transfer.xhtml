@@ -23,6 +23,7 @@
          </ui:insert>
         
         <div id="contenttext" style="width: 800px; font-size: 13px; padding: 148px; font-family: Verdana, Geneva, sans-serif; color: #6C0; font-weight: bold;">
+            <h:messages class="success" id="displaytransfer" />
             <legend>
                 <h2 class="largeredtext">Transfer Funds</h2>
             </legend>
@@ -48,7 +49,7 @@
                             <td><h4>Target Account:     </h4></td>
                             <td>
                                 <h:selectOneMenu class="form-control" value="#{transferBean.toAccount}">
-                                    <f:selectItems value="#{transferBean.toAccounts}" />
+                                    <f:selectItems value="#{transferBean.fromAccounts}" />
                                 </h:selectOneMenu>
                             </td>
                         </tr>

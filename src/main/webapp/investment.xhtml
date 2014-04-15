@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Investment</title>
         <link rel="stylesheet" href="/smBanking/css/style.css" type="text/css" />
@@ -35,6 +36,9 @@
                                 <f:facet name="header">Number</f:facet>
                                     #{account.accountNumber}
                             </h:column>
+                            <h:column>       
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+                </h:column>
                             <h:column>
                                 <f:facet name="header">Balance</f:facet>
                                     #{account.balance}
@@ -44,7 +48,16 @@
                                     <f:param name="selectedAccountId" value="#{account.accountId}" />
                                 </h:commandLink>
                             </h:column>
+                            <h:column>
+                                <p:calendar value="#{accountsBean.inputDate}" navigator="true" id="popupButtonCal" showOn="button" showButtonPanel="true" pattern="yyyy-M-d" />
+                            </h:column>
+                             <h:column>
+                                <h:commandButton value="Calculate Investment" action="#{accountsBean.calculateReturns}" >
+                                    <f:param name="selectedAccountId" value="#{account.accountId}" />
+                                </h:commandButton>
+                            </h:column>
                         </h:dataTable>
+                         <h:messages class="success" id="displayReturns" />
                     </h:form>
                 </ul>
             </div>

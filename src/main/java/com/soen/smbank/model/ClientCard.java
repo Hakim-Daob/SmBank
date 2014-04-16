@@ -6,6 +6,7 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
+import com.soen.smbank.utils.JodaDateTimeConverter;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ClientCard implements Serializable {
 
     private String cardNumber;
 
-//    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+    @Convert(converter= JodaDateTimeConverter.class)
     private DateTime expiryDate;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -1,6 +1,7 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
+import com.soen.smbank.utils.JodaDateTimeConverter;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.text.NumberFormat;
@@ -22,7 +23,7 @@ public class AccountTransaction implements Serializable {
     
     private Long transactionId;
 
-//    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+    @Convert(converter= JodaDateTimeConverter.class)
     private DateTime transactionTime;
 
 

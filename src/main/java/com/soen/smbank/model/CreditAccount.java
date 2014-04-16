@@ -6,6 +6,7 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
+import com.soen.smbank.utils.JodaDateTimeConverter;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class CreditAccount extends Account implements Serializable {
 
     // Credit Card Info
     // Use the account number as the credit card number
-//    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+    @Convert(converter= JodaDateTimeConverter.class)
     private DateTime expiryDate;
     private int CVS;
     // done with cards info

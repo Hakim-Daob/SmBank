@@ -7,6 +7,7 @@ package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
 import com.soen.smbank.utils.DateUtil;
+import com.soen.smbank.utils.JodaDateTimeConverter;
 import com.soen.smbank.utils.RandomUtil;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
@@ -21,6 +22,14 @@ import org.joda.time.DateTimeUtils;
 @PrimaryKeyJoinColumn(name = "accountId")
 public class InvestmentAccount extends Account implements Serializable {
 
+    @Convert(converter= JodaDateTimeConverter.class)
+    private DateTime startDate;
+    @Convert(converter= JodaDateTimeConverter.class)
+    private DateTime endDate;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private InvestmentPlan investmentPlan;
+    
     public InvestmentAccount() {
         super();
     }
@@ -31,14 +40,8 @@ public class InvestmentAccount extends Account implements Serializable {
         this.endDate = endDate;
         this.investmentPlan = investmentPlan;
     }
-//    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
-    private DateTime startDate;
 
-//    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
-    private DateTime endDate;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private InvestmentPlan investmentPlan;
+  
 
     public DateTime getStartDate() {
         return startDate;

@@ -6,6 +6,7 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
+import com.soen.smbank.utils.JodaDateTimeConverter;
 
 
 import java.io.Serializable;
@@ -26,6 +27,8 @@ public class Account implements Serializable {
     private double balance;
     private String currency;
     private String currencySign;
+    
+    @Convert(converter= JodaDateTimeConverter.class)
     private DateTime openedDate;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -152,7 +152,7 @@ public class CreditAccount extends Account implements Serializable {
             try {
                 this.updateAccount();
                 isDone = true;
-                Transaction tr = new Transaction(this, amountIncludesInterest, 0, description);
+                AccountTransaction tr = new AccountTransaction(this, amountIncludesInterest, 0, description);
                 tr.saveTransaction();
             } catch (Exception e) {
                 return false;

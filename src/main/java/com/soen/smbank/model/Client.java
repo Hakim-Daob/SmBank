@@ -30,7 +30,7 @@ import org.hibernate.criterion.Restrictions;
 @Entity
 @Table
 @PrimaryKeyJoinColumn(name = "userId")
-public class Client extends User implements Serializable {
+public class Client extends Person implements Serializable {
 
     @Column
     private long age;
@@ -115,7 +115,7 @@ public class Client extends User implements Serializable {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            clientHolder = (Client) session.createCriteria(User.class).
+            clientHolder = (Client) session.createCriteria(Person.class).
                     add(Restrictions.eq("userName", clientNumber)).
                     uniqueResult();
         } catch (Exception e) {

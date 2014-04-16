@@ -64,7 +64,7 @@ public class Account implements Serializable {
 
     @OneToMany(mappedBy = "sourceAccount",fetch = FetchType.EAGER)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Transaction> sourceTransactions;
+    private List<AccountTransaction> sourceTransactions;
 
     public static enum AccountStatus {
 
@@ -80,7 +80,7 @@ public class Account implements Serializable {
         this.currencySign = "$";
         this.status = AccountStatus.ACTIVE;
         this.openedDate = DateTime.now();
-        this.sourceTransactions = new ArrayList<Transaction>();
+        this.sourceTransactions = new ArrayList<AccountTransaction>();
     }
 
     public Account(double startingBalance, Client client) {
@@ -90,7 +90,7 @@ public class Account implements Serializable {
         this.currencySign = "$";
         this.status = AccountStatus.ACTIVE;
         this.openedDate = DateTime.now();
-        this.sourceTransactions = new ArrayList<Transaction>();
+        this.sourceTransactions = new ArrayList<AccountTransaction>();
     }
 
     public Long getAccountId() {
@@ -144,22 +144,20 @@ public class Account implements Serializable {
     public AccountStatus getStatus() {
         return status;
     }
-
+    
     public void setStatus(AccountStatus status) {
         this.status = status;
     }
 
-    public List<Transaction> getSourceTransactions() {
+    public List<AccountTransaction> getSourceTransactions() {
         return sourceTransactions;
     }
 
-    public void setSourceTransactions(List<Transaction> sourceTransactions) {
+    public void setSourceTransactions(List<AccountTransaction> sourceTransactions) {
         this.sourceTransactions = sourceTransactions;
     }
 
-    public String getCurrencySign() {
-        return currencySign;
-    }
+   
 
     public void setCurrencySign(String currencySign) {
         this.currencySign = currencySign;
@@ -220,8 +218,7 @@ public class Account implements Serializable {
         try {
             this.updateAccount();
             isDone = true;
-            
-            Transaction tr = new Transaction(this, amount, 0,"Withdrawl: "+ description);
+            AccountTransaction   tr = new AccountTransaction(this, amount, 0,"Withdrawl: "+ description);
             tr.saveTransaction();
         } catch (Exception e) {
             return false;
@@ -237,8 +234,9 @@ public class Account implements Serializable {
         this.setBalance(balance);
         try {
             this.updateAccount();
-            isDone = true;
-            Transaction tr = new Transaction(this, 0, amount,  "Deposit:"+description);
+            isDone=true;
+            
+            AccountTransaction tr = new AccountTransaction(this, 0, amount,  "Deposit:"+description);
             tr.saveTransaction();
         } catch (Exception e) {
             return false;
@@ -264,12 +262,13 @@ public class Account implements Serializable {
                 targetAccount.updateAccount();
 
                 isDone = true;
-                String transactionDescription= "Transfer:" + description;
-                Transaction sourceTransaction = new Transaction(sourceAccount, amount, 0, transactionDescription);
-                transactionDescription=  description;
+                
+               
+                        
+                AccountTransaction sourceTransaction = new AccountTransaction(sourceAccount, amount, 0, description);
                 sourceTransaction.saveTransaction();
                
-                Transaction targetTransaction = new Transaction(targetAccount, 0, amount, transactionDescription);
+                AccountTransaction targetTransaction = new AccountTransaction(targetAccount, 0, amount, description);
                 targetTransaction.saveTransaction();
             } catch (Exception e) {
                 return false;

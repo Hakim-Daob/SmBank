@@ -26,8 +26,7 @@ import org.joda.time.DateTime;
  * and open the template in the editor.
  */
 @Entity
-@Table(name = "transaction")
-public class Transaction implements Serializable {
+public class AccountTransaction implements Serializable {
 
     @Id
     @GeneratedValue
@@ -51,10 +50,10 @@ public class Transaction implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Account sourceAccount;
 
-    public Transaction() {
+    public AccountTransaction() {
     }
 
-    public Transaction(Account sourceAccount, double debit, double credit, String description) {
+    public AccountTransaction(Account sourceAccount, double debit, double credit, String description) {
         this.sourceAccount = sourceAccount;
         this.description = description;
         this.debit = debit;
@@ -145,26 +144,26 @@ public class Transaction implements Serializable {
     }
 
     public long saveTransaction() {
-        ObjectDao<Transaction> accountDao = new ObjectDao<Transaction>();
+        ObjectDao<AccountTransaction> accountDao = new ObjectDao<AccountTransaction>();
         return accountDao.addObject(this);
     }
 
     public void updateTransaction() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao<Transaction> accountDao = new ObjectDao<Transaction>();
-        accountDao.updateObject(this, this.getTransactionId(), Transaction.class);
+        ObjectDao<AccountTransaction> accountDao = new ObjectDao<AccountTransaction>();
+        accountDao.updateObject(this, this.getTransactionId(), AccountTransaction.class);
     }
 
     public void deleteTransaction() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao<Transaction> accountDao = new ObjectDao<Transaction>();
-        accountDao.deleteObject(this, this.getTransactionId(), Transaction.class);
+        ObjectDao<AccountTransaction> accountDao = new ObjectDao<AccountTransaction>();
+        accountDao.deleteObject(this, this.getTransactionId(), AccountTransaction.class);
     }
 
-    public static Transaction getTransactionById(long id) {
-        Transaction accountHolder = null;
+    public static AccountTransaction getTransactionById(long id) {
+        AccountTransaction accountHolder = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            accountHolder = (Transaction) session.get(Transaction.class, id);
+            accountHolder = (AccountTransaction) session.get(AccountTransaction.class, id);
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
@@ -175,17 +174,17 @@ public class Transaction implements Serializable {
         return accountHolder;
     }
 
-    public static ArrayList<Transaction> getTransactions() {
-        ArrayList<Transaction> transactions;
+    public static ArrayList<AccountTransaction> getTransactions() {
+        ArrayList<AccountTransaction> transactions;
         ObjectDao accountDao = new ObjectDao();
         transactions = accountDao.getAllObjects("Transaction");
         return transactions;
     }
 
-    public static ArrayList<Transaction> getAccountTransactions(String accountNumber) {
-        ArrayList<Transaction> transactions;
+    public static ArrayList<AccountTransaction> getAccountTransactions(String accountNumber) {
+        ArrayList<AccountTransaction> transactions;
         ObjectDao accountDao = new ObjectDao();
-        transactions = accountDao.getAllObjectsByCondition("Transaction", "sourceAccount_accountId = " + accountNumber);
+        transactions = accountDao.getAllObjectsByCondition("Transaaction", "sourceAccount_accountId = " + accountNumber);
         return transactions;
     }
 }

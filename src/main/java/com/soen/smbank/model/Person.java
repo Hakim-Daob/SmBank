@@ -31,7 +31,7 @@ import org.hibernate.Session;
 @Entity
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements Serializable{
+public class Person implements Serializable{
 
     @Id
     @GeneratedValue
@@ -136,26 +136,26 @@ public class User implements Serializable{
 
 
     public long saveUser()  {
-        ObjectDao<User> userDao = new ObjectDao<User>();
+        ObjectDao<Person> userDao = new ObjectDao<Person>();
         return userDao.addObject(this);
     }
 
     public void updateUser() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao<User> userDao = new ObjectDao<User>();
-        userDao.updateObject(this, this.getUserId(), User.class);
+        ObjectDao<Person> userDao = new ObjectDao<Person>();
+        userDao.updateObject(this, this.getUserId(), Person.class);
     }
 
     public void deleteUser() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao<User> userDao = new ObjectDao<User>();
-        userDao.deleteObject(this, this.getUserId(), User.class);
+        ObjectDao<Person> userDao = new ObjectDao<Person>();
+        userDao.deleteObject(this, this.getUserId(), Person.class);
     }
 
-    public static User getUserById(long id) {
-        User userHolder = null;
+    public static Person getUserById(long id) {
+        Person userHolder = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            userHolder = (User) session.get(User.class, id);
+            userHolder = (Person) session.get(Person.class, id);
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
@@ -166,8 +166,8 @@ public class User implements Serializable{
         return userHolder;
     }
 
-    public static ArrayList<User> getUsers() {
-        ArrayList<User> users;
+    public static ArrayList<Person> getUsers() {
+        ArrayList<Person> users;
         ObjectDao userDao = new ObjectDao();
         users = userDao.getAllObjects("User");
         return users;

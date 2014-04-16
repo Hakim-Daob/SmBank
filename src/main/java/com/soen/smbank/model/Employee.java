@@ -14,6 +14,6 @@ import javax.persistence.Table;
 @Entity
 @Table
 @PrimaryKeyJoinColumn(name = "userId")
-public class Employee extends User implements Serializable{
+public class Employee extends Person implements Serializable{
     
 }

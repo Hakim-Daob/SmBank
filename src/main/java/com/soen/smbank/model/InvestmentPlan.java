@@ -7,25 +7,16 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
-import com.soen.smbank.persistence.HibernateUtil;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.annotations.Type;
+import javax.persistence.*;
 
 
 @Entity
 @Table(name = "InvestmentPlan")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 public class InvestmentPlan implements Serializable{
     
     @Id
@@ -76,42 +67,30 @@ public class InvestmentPlan implements Serializable{
     }
       
 
-    public long saveInvestmentPlan()  {
+    public void saveInvestmentPlan()  {
         ObjectDao<InvestmentPlan> investmentPlanDao = new ObjectDao<InvestmentPlan>();
-        return investmentPlanDao.addObject(this);
+        investmentPlanDao.addObject(this);
     }
 
-    public void updateInvestmentPlan() throws IllegalAccessException, InvocationTargetException {
+    public void updateInvestmentPlan()  {
         ObjectDao<InvestmentPlan> investmentPlanDao = new ObjectDao<InvestmentPlan>();
         investmentPlanDao.updateObject(this, this.getInvestmentPlanId(), InvestmentPlan.class);
     }
 
-    public void deleteInvestmentPlan() throws IllegalAccessException, InvocationTargetException {
+    public void deleteInvestmentPlan()  {
         ObjectDao<InvestmentPlan> investmentPlanDao = new ObjectDao<InvestmentPlan>();
         investmentPlanDao.deleteObject(this, this.getInvestmentPlanId(), InvestmentPlan.class);
     }
 
     public static InvestmentPlan getInvestmentPlanById(long id) {
-        InvestmentPlan investmentPlanHolder = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            investmentPlanHolder = (InvestmentPlan) session.get(InvestmentPlan.class, id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return investmentPlanHolder;
+           ObjectDao<InvestmentPlan> dao = new ObjectDao<InvestmentPlan>();
+           return dao.getObjectById(id, InvestmentPlan.class);
     }
 
     public static ArrayList<InvestmentPlan> getInvestmentPlans() {
-        ArrayList<InvestmentPlan> investmentPlans;
-        ObjectDao investmentPlanDao = new ObjectDao();
-        investmentPlans = investmentPlanDao.getAllObjects("InvestmentPlan");
-        return investmentPlans;
+         ObjectDao<InvestmentPlan> dao = new ObjectDao<InvestmentPlan>();
+        return dao.getAllObjects(InvestmentPlan.class, "InvestmentPlan");
+       
     }
 }
  

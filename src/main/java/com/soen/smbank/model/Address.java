@@ -5,53 +5,30 @@
  */
 package com.soen.smbank.model;
 
-
 import com.soen.smbank.dao.ObjectDao;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  *
  * @author HMD
  */
-
-
 @Entity
-@Table(name="Address")
+@Table(name = "Address")
 public class Address implements Serializable {
 
     @Id
     @GeneratedValue
     private long addressId;
-
-    @Column
     private String streetNumber;
-
-    @Column
     private String streetName;
-
-    @Column
     private String apartmentNumber;
-
-    @Column
     private String city;
-
-    @Column
     private String province;
-
-    @Column
     private String postalCode;
-
-    @Column
     private String country;
-
-   
 
     public Address() {
     }
@@ -131,24 +108,30 @@ public class Address implements Serializable {
     }
 
     public void saveAddress() {
-        ObjectDao addressDao = new ObjectDao();
+        ObjectDao<Address> addressDao = new ObjectDao<Address>();
         addressDao.addObject(this);
     }
 
-    public void updateAddress() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao addressDao = new ObjectDao();
-        addressDao.updateObject(this,this.addressId,Address.class);
+    public void updateAddress()  {
+        ObjectDao<Address> addressDao = new ObjectDao<Address>();
+        addressDao.updateObject(this, this.addressId, Address.class);
     }
 
-    public void deleteAddress() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao addressDao = new ObjectDao();
-        addressDao.deleteObject(this,this.addressId,Address.class);
+    public void deleteAddress()  {
+        ObjectDao<Address> addressDao = new ObjectDao<Address>();
+        addressDao.deleteObject(this, this.addressId, Address.class);
     }
 
     public ArrayList<Address> getAllAddresses() {
-        ArrayList<Address> addresses;
-        ObjectDao userDao = new ObjectDao();
-        addresses = userDao.getAllObjects("Address");
-        return addresses;
+       
+        ObjectDao<Address> addressDao = new ObjectDao<Address>();
+         return addressDao.getAllObjects(Address.class, "Address");
+    }
+    
+    public Address getAddressById(long id){
+        
+        ObjectDao<Address> dao = new ObjectDao<Address>();
+        return dao.getObjectById(id, Address.class);
+    
     }
 }

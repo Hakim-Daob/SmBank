@@ -6,18 +6,10 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
-import com.soen.smbank.persistence.HibernateUtil;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import javax.persistence.*;
  
 @Entity
 @Table
@@ -28,13 +20,13 @@ public class ChequingAccount extends Account implements Serializable {
    
 
     @Override
-    public long saveAccount() {
+    public void saveAccount() {
         ObjectDao<ChequingAccount> accountDao = new ObjectDao<ChequingAccount>();
-        return accountDao.addObject(this);
+         accountDao.addObject(this);
     }
 
     @Override
-    public void updateAccount() throws IllegalAccessException, InvocationTargetException {
+    public void updateAccount()  {
         ObjectDao<ChequingAccount> checkingAccountDao = new ObjectDao<ChequingAccount>();
          checkingAccountDao.updateObject(this, this.getAccountId(), ChequingAccount.class);
 //        String setString = " balance = " + this.getBalance();
@@ -44,32 +36,20 @@ public class ChequingAccount extends Account implements Serializable {
     }
 
     @Override
-    public void deleteAccount() throws IllegalAccessException, InvocationTargetException {
-        ObjectDao checkingAccountDao = new ObjectDao();
+    public void deleteAccount()  {
+        ObjectDao<ChequingAccount> checkingAccountDao = new ObjectDao<ChequingAccount>();
         checkingAccountDao.deleteObject(this, this.getAccountId(), ChequingAccount.class);
     }
 
     public static ChequingAccount getCheckingAccountById(long id) {
-        ChequingAccount checkingAccountHolder = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            checkingAccountHolder = (ChequingAccount) session.get(ChequingAccount.class, id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return checkingAccountHolder;
+       
+        ObjectDao<ChequingAccount> dao = new ObjectDao<ChequingAccount>();
+        return dao.getObjectById(id, ChequingAccount.class);
     }
 
     public static ArrayList<ChequingAccount> getCheckingAccounts() {
-        ArrayList<ChequingAccount> checkingAccounts;
-        ObjectDao checkingAccountDao = new ObjectDao();
-        checkingAccounts = checkingAccountDao.getAllObjects("CheckingAccount");
-        return checkingAccounts;
+       ObjectDao<ChequingAccount> dao = new ObjectDao<ChequingAccount>();
+        return dao.getAllObjects(ChequingAccount.class, "ChequingAccount");
     }
 
     @Override

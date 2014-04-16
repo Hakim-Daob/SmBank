@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="smBankingPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.soen.smbank.model.Account</class>
+    <class>com.soen.smbank.model.AccountTransaction</class>
+    <class>com.soen.smbank.model.Address</class>
+    <class>com.soen.smbank.model.ChequingAccount</class>
+    <class>com.soen.smbank.model.Client</class>
+    <class>com.soen.smbank.model.ClientCard</class>
+    <class>com.soen.smbank.model.ClosedTermInvestment</class>
+    <class>com.soen.smbank.model.CreditAccount</class>
+    <class>com.soen.smbank.model.CreditPlan</class>
+    <class>com.soen.smbank.model.Employee</class>
+    <class>com.soen.smbank.model.InvestmentAccount</class>
+    <class>com.soen.smbank.model.InvestmentPlan</class>
+    <class>com.soen.smbank.model.OpenTermInvestment</class>
+    <class>com.soen.smbank.model.Payee</class>
+    <class>com.soen.smbank.model.PayeeAccount</class>
+    <class>com.soen.smbank.model.Person</class>
+    <class>com.soen.smbank.model.Role</class>
+    <class>com.soen.smbank.model.SavingAccount</class>
+    <class>com.soen.smbank.model.UserRole</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/smBanking001?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.password" value="1234"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="eclipselink.ddl-generation" value="create-tables"/>
+    </properties>
+  </persistence-unit>
+</persistence>

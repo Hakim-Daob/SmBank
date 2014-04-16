@@ -6,19 +6,15 @@
 
 package com.soen.smbank.model;
 
+import com.soen.smbank.dao.ObjectDao;
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table
 
 public class UserRole implements Serializable {
     
-     @Id
     private double userId;
-     @Id
     private double roleId;
 
     public double getUserId() {

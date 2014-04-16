@@ -6,23 +6,13 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
-import com.soen.smbank.persistence.HibernateUtil;
 import com.soen.smbank.utils.DateUtil;
 import com.soen.smbank.utils.RandomUtil;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.annotations.Type;
+import javax.persistence.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 
@@ -41,12 +31,10 @@ public class InvestmentAccount extends Account implements Serializable {
         this.endDate = endDate;
         this.investmentPlan = investmentPlan;
     }
-    @Column
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+//    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime startDate;
 
-    @Column
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+//    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime endDate;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -77,10 +65,10 @@ public class InvestmentAccount extends Account implements Serializable {
     }
 
     @Override
-    public long saveAccount() {
+    public void saveAccount() {
         ObjectDao<InvestmentAccount> accountDao = new ObjectDao<InvestmentAccount>();
         this.endDate = DateUtil.addDays(this.startDate, this.investmentPlan.getDurationInDays());
-        return accountDao.addObject(this);
+        accountDao.addObject(this);
     }
 
     @Override
@@ -97,26 +85,14 @@ public class InvestmentAccount extends Account implements Serializable {
     }
 
     public static InvestmentAccount getInvestmentAccountById(long id) {
-        InvestmentAccount investmentAccountHolder = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            investmentAccountHolder = (InvestmentAccount) session.get(InvestmentAccount.class, id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return investmentAccountHolder;
+        ObjectDao<InvestmentAccount> dao = new ObjectDao<InvestmentAccount>();
+        return dao.getObjectById(id, InvestmentAccount.class);
+        
     }
 
     public static ArrayList<InvestmentAccount> getInvestmentAccounts() {
-        ArrayList<InvestmentAccount> investmentAccounts;
-        ObjectDao investmentAccountDao = new ObjectDao();
-        investmentAccounts = investmentAccountDao.getAllObjects("InvestmentAccount");
-        return investmentAccounts;
+        ObjectDao<InvestmentAccount> dao = new ObjectDao<InvestmentAccount>();
+        return dao.getAllObjects(InvestmentAccount.class, "InvestmentAccount");
     }
 
     @Override

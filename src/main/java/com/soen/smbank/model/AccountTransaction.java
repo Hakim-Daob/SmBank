@@ -1,23 +1,12 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
-import com.soen.smbank.persistence.HibernateUtil;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.annotations.Type;
+import javax.persistence.*;
 import org.joda.time.DateTime;
 
 /*
@@ -30,21 +19,18 @@ public class AccountTransaction implements Serializable {
 
     @Id
     @GeneratedValue
+    
     private Long transactionId;
 
-    @Column
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+//    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime transactionTime;
 
-    @Column
+
     private String description;
-    @Column
+
     private double debit;
-    @Column
     private String formattedDebit;
-    @Column
     private double credit;
-    @Column
     private String formattedCredit;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -143,48 +129,36 @@ public class AccountTransaction implements Serializable {
         }
     }
 
-    public long saveTransaction() {
-        ObjectDao<AccountTransaction> accountDao = new ObjectDao<AccountTransaction>();
-        return accountDao.addObject(this);
+    public void saveTransaction() {
+            ObjectDao<AccountTransaction> accountDao = new ObjectDao<AccountTransaction>();
+        accountDao.addObject(this);
     }
 
-    public void updateTransaction() throws IllegalAccessException, InvocationTargetException {
+    public void updateTransaction()  {
         ObjectDao<AccountTransaction> accountDao = new ObjectDao<AccountTransaction>();
         accountDao.updateObject(this, this.getTransactionId(), AccountTransaction.class);
     }
 
-    public void deleteTransaction() throws IllegalAccessException, InvocationTargetException {
+    public void deleteTransaction()  {
         ObjectDao<AccountTransaction> accountDao = new ObjectDao<AccountTransaction>();
         accountDao.deleteObject(this, this.getTransactionId(), AccountTransaction.class);
     }
 
     public static AccountTransaction getTransactionById(long id) {
-        AccountTransaction accountHolder = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            accountHolder = (AccountTransaction) session.get(AccountTransaction.class, id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return accountHolder;
+       
+       ObjectDao<AccountTransaction> dao = new ObjectDao<AccountTransaction>();
+        return dao.getObjectById(id, AccountTransaction.class);
     }
 
     public static ArrayList<AccountTransaction> getTransactions() {
-        ArrayList<AccountTransaction> transactions;
-        ObjectDao accountDao = new ObjectDao();
-        transactions = accountDao.getAllObjects("Transaction");
-        return transactions;
+         ObjectDao<AccountTransaction> dao = new ObjectDao<AccountTransaction>();
+        return dao.getAllObjects(AccountTransaction.class, "AccountTransaction");
     }
 
     public static ArrayList<AccountTransaction> getAccountTransactions(String accountNumber) {
         ArrayList<AccountTransaction> transactions;
-        ObjectDao accountDao = new ObjectDao();
-        transactions = accountDao.getAllObjectsByCondition("Transaaction", "sourceAccount_accountId = " + accountNumber);
+        ObjectDao accountTransactionDao = new ObjectDao();
+        transactions = accountTransactionDao.getAllObjectsByCondition("AccountTransaction", "sourceAccount_accountId = " + accountNumber);
         return transactions;
     }
 }

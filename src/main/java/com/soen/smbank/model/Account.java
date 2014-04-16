@@ -7,63 +7,31 @@ package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
 
-import com.soen.smbank.persistence.HibernateUtil;
+
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.annotations.Type;
+import javax.persistence.*;
 import org.joda.time.DateTime;
 
-
-
 @Entity
-@Table
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Account implements Serializable {
 
     @Id
     @GeneratedValue
     protected Long accountId;
-
-    @Column
     private String accountNumber;
-
-    @Column
     private double balance;
-
-    @Column
     private String currency;
-
-    @Column
     private String currencySign;
-
-    @Column
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime openedDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Client client;
 
-    @OneToMany(mappedBy = "sourceAccount",fetch = FetchType.EAGER)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "sourceAccount", fetch = FetchType.EAGER)
     private List<AccountTransaction> sourceTransactions;
 
     public static enum AccountStatus {
@@ -144,7 +112,7 @@ public class Account implements Serializable {
     public AccountStatus getStatus() {
         return status;
     }
-    
+
     public void setStatus(AccountStatus status) {
         this.status = status;
     }
@@ -157,16 +125,14 @@ public class Account implements Serializable {
         this.sourceTransactions = sourceTransactions;
     }
 
-   
-
     public void setCurrencySign(String currencySign) {
         this.currencySign = currencySign;
     }
 
-    // Hibernate Methods
-    public long saveAccount() {
+  // ecliseLink Methods
+    public void saveAccount() {
         ObjectDao<Account> accountDao = new ObjectDao<Account>();
-        return accountDao.addObject(this);
+        accountDao.addObject(this);
     }
 
     public void updateAccount() throws IllegalAccessException, InvocationTargetException {
@@ -180,26 +146,13 @@ public class Account implements Serializable {
     }
 
     public static Account getAccountById(long id) {
-        Account accountHolder = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            accountHolder = (Account) session.get(Account.class, id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return accountHolder;
+        ObjectDao<Account> dao = new ObjectDao<Account>();
+        return dao.getObjectById(id, Account.class);
     }
 
     public static ArrayList<Account> getAccounts() {
-        ArrayList<Account> accounts;
-        ObjectDao accountDao = new ObjectDao();
-        accounts = accountDao.getAllObjects("Account");
-        return accounts;
+        ObjectDao<Account> dao = new ObjectDao<Account>();
+        return dao.getAllObjects(Account.class, "Account");
     }
 
     public static ArrayList<Account> getAllClientAccounts(Long clientId) {
@@ -218,7 +171,7 @@ public class Account implements Serializable {
         try {
             this.updateAccount();
             isDone = true;
-            AccountTransaction   tr = new AccountTransaction(this, amount, 0,"Withdrawl: "+ description);
+            AccountTransaction tr = new AccountTransaction(this, amount, 0, "Withdrawl: " + description);
             tr.saveTransaction();
         } catch (Exception e) {
             return false;
@@ -234,9 +187,9 @@ public class Account implements Serializable {
         this.setBalance(balance);
         try {
             this.updateAccount();
-            isDone=true;
-            
-            AccountTransaction tr = new AccountTransaction(this, 0, amount,  "Deposit:"+description);
+            isDone = true;
+
+            AccountTransaction tr = new AccountTransaction(this, 0, amount, "Deposit:" + description);
             tr.saveTransaction();
         } catch (Exception e) {
             return false;
@@ -262,12 +215,10 @@ public class Account implements Serializable {
                 targetAccount.updateAccount();
 
                 isDone = true;
-                
-               
-                        
+
                 AccountTransaction sourceTransaction = new AccountTransaction(sourceAccount, amount, 0, description);
                 sourceTransaction.saveTransaction();
-               
+
                 AccountTransaction targetTransaction = new AccountTransaction(targetAccount, 0, amount, description);
                 targetTransaction.saveTransaction();
             } catch (Exception e) {
@@ -293,15 +244,17 @@ public class Account implements Serializable {
         }
         return accounts;
     }
-    public static List<Account> getPersonalAccount(List<Account> clientAccounts){
-    List<Account> accounts = new ArrayList<Account>();
-    for (Account ac : clientAccounts) {
+
+    public static List<Account> getPersonalAccount(List<Account> clientAccounts) {
+        List<Account> accounts = new ArrayList<Account>();
+        for (Account ac : clientAccounts) {
             if (!(ac instanceof PayeeAccount) && !(ac instanceof InvestmentAccount)) {
                 accounts.add(ac);
             }
         }
         return accounts;
     }
+
     public static List<Account> getInvestmentAccounts(List<Account> clientAccounts) {
         List<Account> accounts = new ArrayList<Account>();
 

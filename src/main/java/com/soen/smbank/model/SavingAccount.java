@@ -7,25 +7,18 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
-import com.soen.smbank.persistence.HibernateUtil;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import javax.persistence.*;
 
 
 @Entity
-@Table
 @PrimaryKeyJoinColumn(name = "accountId")
 public class SavingAccount extends Account implements Serializable{
     
   
     public SavingAccount(){super();}
-    
     
     
     
@@ -45,25 +38,14 @@ public class SavingAccount extends Account implements Serializable{
     }
 
     public static SavingAccount getSavingAccountById(long id) {
-        SavingAccount savingAccountHolder = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            savingAccountHolder = (SavingAccount) session.get(SavingAccount.class, id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return savingAccountHolder;
+        ObjectDao<SavingAccount> dao = new ObjectDao<SavingAccount>();
+        return dao.getObjectById(id, SavingAccount.class);
+        
     }
 
     public static ArrayList<SavingAccount> getSavingAccounts() {
-        ArrayList<SavingAccount> savingAccounts;
-        ObjectDao savingAccountDao = new ObjectDao();
-        savingAccounts = savingAccountDao.getAllObjects("SavingAccount");
-        return savingAccounts;
+         ObjectDao<SavingAccount> dao = new ObjectDao<SavingAccount>();
+        return dao.getAllObjects(SavingAccount.class, "SavingAccount");
+        
     }
 }

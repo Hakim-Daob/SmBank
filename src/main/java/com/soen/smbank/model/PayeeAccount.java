@@ -7,19 +7,10 @@
 package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
-import com.soen.smbank.persistence.HibernateUtil;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -40,13 +31,13 @@ public class PayeeAccount extends Account implements Serializable{
     }
     
     @Override
-    public long saveAccount() {
+    public void saveAccount() {
         ObjectDao<PayeeAccount> accountDao = new ObjectDao<PayeeAccount>();
-        return accountDao.addObject(this);
+         accountDao.addObject(this);
     }
 
     @Override
-    public void updateAccount() throws IllegalAccessException, InvocationTargetException {
+    public void updateAccount()  {
         ObjectDao<PayeeAccount> payeeAccountDao = new ObjectDao<PayeeAccount>();
         payeeAccountDao.updateObject(this, this.getAccountId(), PayeeAccount.class);
     }
@@ -58,25 +49,14 @@ public class PayeeAccount extends Account implements Serializable{
     }
 
     public static PayeeAccount getPayeeAccountById(long id) {
-        PayeeAccount payeeAccountHolder = null;
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            payeeAccountHolder = (PayeeAccount) session.get(PayeeAccount.class, id);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return payeeAccountHolder;
+         ObjectDao<PayeeAccount> dao = new ObjectDao<PayeeAccount>();
+        return dao.getObjectById(id, PayeeAccount.class);
     }
+    
 
     public static ArrayList<PayeeAccount> getPayeeAccounts() {
-        ArrayList<PayeeAccount> payeeAccounts;
-        ObjectDao payeeAccountDao = new ObjectDao();
-        payeeAccounts = payeeAccountDao.getAllObjects("PayeeAccount");
-        return payeeAccounts;
+         ObjectDao<PayeeAccount> dao = new ObjectDao<PayeeAccount>();
+        return dao.getAllObjects(PayeeAccount.class, "PayeeAccount");
+       
     }
 }

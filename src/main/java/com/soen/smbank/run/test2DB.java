@@ -26,7 +26,7 @@ public class test2DB {
         List<CreditAccount> accounts = cr.getCreditAccounts();
         accounts.add(ca);
         
-        long id= cr.saveCreditPlan();
+//        long id= cr.saveCreditPlan();
         
         
         

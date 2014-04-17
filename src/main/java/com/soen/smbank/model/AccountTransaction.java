@@ -3,7 +3,6 @@ package com.soen.smbank.model;
 import com.soen.smbank.dao.ObjectDao;
 import com.soen.smbank.utils.JodaDateTimeConverter;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;

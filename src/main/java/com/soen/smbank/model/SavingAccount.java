@@ -14,7 +14,6 @@ import javax.persistence.*;
 
 
 @Entity
-@PrimaryKeyJoinColumn(name = "accountId")
 public class SavingAccount extends Account implements Serializable{
     
   

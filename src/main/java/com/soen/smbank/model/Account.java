@@ -17,7 +17,7 @@ import javax.persistence.*;
 import org.joda.time.DateTime;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Account implements Serializable {
 
     @Id

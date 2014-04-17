@@ -14,8 +14,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "InvestmentPlan")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class InvestmentPlan implements Serializable{
     

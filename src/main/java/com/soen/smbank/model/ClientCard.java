@@ -9,13 +9,10 @@ import com.soen.smbank.dao.ObjectDao;
 import com.soen.smbank.utils.JodaDateTimeConverter;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
 import org.joda.time.DateTime;
 
 @Entity
-@Table
 public class ClientCard implements Serializable {
 
     @Id

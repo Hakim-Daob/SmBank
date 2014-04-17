@@ -11,14 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author HMD
- */
+
 @Entity
-@Table
-@PrimaryKeyJoinColumn(name = "userId")
-public class Client extends Person implements Serializable {
+public class Client extends User implements Serializable {
 
     private long age;
 

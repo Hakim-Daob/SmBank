@@ -17,8 +17,9 @@ import javax.persistence.*;
  * @author HMD
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Person implements Serializable{
+@Table(name="user")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class User implements Serializable{
 
     @Id
     @GeneratedValue
@@ -110,28 +111,28 @@ public class Person implements Serializable{
 
 
     public void saveUser()  {
-        ObjectDao<Person> userDao = new ObjectDao<Person>();
+        ObjectDao<User> userDao = new ObjectDao<User>();
         userDao.addObject(this);
     }
 
     public void updateUser() {
-        ObjectDao<Person> userDao = new ObjectDao<Person>();
-        userDao.updateObject(this, this.getUserId(), Person.class);
+        ObjectDao<User> userDao = new ObjectDao<User>();
+        userDao.updateObject(this, this.getUserId(), User.class);
     }
 
     public void deleteUser()  {
-        ObjectDao<Person> userDao = new ObjectDao<Person>();
-        userDao.deleteObject(this, this.getUserId(), Person.class);
+        ObjectDao<User> userDao = new ObjectDao<User>();
+        userDao.deleteObject(this, this.getUserId(), User.class);
     }
 
-    public static Person getUserById(long id) {
-        ObjectDao<Person> dao = new ObjectDao<Person>();
-        return dao.getObjectById(id, Person.class);
+    public static User getUserById(long id) {
+        ObjectDao<User> dao = new ObjectDao<User>();
+        return dao.getObjectById(id, User.class);
     }
 
-    public static ArrayList<Person> getUsers() {
-        ObjectDao<Person> dao = new ObjectDao<Person>();
-        return dao.getAllObjects(Person.class, "Person");
+    public static ArrayList<User> getUsers() {
+        ObjectDao<User> dao = new ObjectDao<User>();
+        return dao.getAllObjects(User.class, "Person");
         
     }
 }

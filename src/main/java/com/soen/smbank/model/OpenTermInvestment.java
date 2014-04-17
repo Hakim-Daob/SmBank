@@ -7,7 +7,6 @@ package com.soen.smbank.model;
 
 import com.soen.smbank.dao.ObjectDao;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import javax.persistence.*;
 
@@ -16,9 +15,6 @@ import javax.persistence.*;
  * @author HMD
  */
 @Entity
-@Table
-@PrimaryKeyJoinColumn(name = "investmentPlanId")
-
 public class OpenTermInvestment extends InvestmentPlan implements Serializable {
 
     public OpenTermInvestment() {

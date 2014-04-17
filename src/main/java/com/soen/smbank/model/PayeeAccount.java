@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import javax.persistence.*;
 
 @Entity
-@Table
-@PrimaryKeyJoinColumn(name = "accountId")
 public class PayeeAccount extends Account implements Serializable{
     
     //@OneToMany(mappedBy = "payeeAccount",fetch = FetchType.EAGER)

@@ -21,17 +21,17 @@ public class test1DB {
 
     public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
 
-//        Client cl = new Client();
-//        cl.setFirstName("jh");
-//        cl.setLastName("jf");
-//        cl.setAge(99);
-//        cl.setEmail("ff");
-//        cl.setGender("Male");
-//        cl.setUserName("01234567890");
-//        cl.setPassword("12");
-//        cl.setPhoneNumber("514-9999");
-//        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
-//        cl.saveUser();
+        Client cl = new Client();
+        cl.setFirstName("jh");
+        cl.setLastName("jf");
+        cl.setAge(99);
+        cl.setEmail("ff");
+        cl.setGender("Male");
+        cl.setUserName("01234567890");
+        cl.setPassword("12");
+        cl.setPhoneNumber("514-9999");
+        //cl.setClientCard(new ClientCard("12-34-56", DateTime.now(),cl));
+        cl.saveUser();
 ////
 //        Client cl = Client.getClientsById(1);
 //        ChequingAccount ca = new ChequingAccount();
@@ -208,27 +208,27 @@ public class test1DB {
 //        ArrayList<Account> allAccounts = Account.getAllClientAccounts(client.getUserId());
 //        System.out.println("=====>" + allAccounts);
         
-        Client cl2= Client.getClientsById(1);
-        if (cl2 == null)
-            System.out.println("Client is null");
-        
-        
-        ChequingAccount ca = ChequingAccount.getCheckingAccountById(1);
-        SavingAccount sa = SavingAccount.getSavingAccountById(2);
-    
-//     
-        if (sa == null)
-            System.out.println("Saving is null");
-        if (ca == null)
-            System.out.println("Chequing is null");
-        else{
-            System.out.println("Before: Chequing Balance = " + ca.getBalance());
-             System.out.println("Before: Saving Balance = " + sa.getBalance());
-             Account.transfer(ca, sa, 1000, "Paying my load");
-             System.out.println("After: Chequing Balance = " + ca.getBalance());
-             System.out.println("After: Saving Balance = " + sa.getBalance());
-        } 
-        
+//        Client cl2= Client.getClientsById(1);
+//        if (cl2 == null)
+//            System.out.println("Client is null");
+//        
+//        
+//        ChequingAccount ca = ChequingAccount.getCheckingAccountById(1);
+//        SavingAccount sa = SavingAccount.getSavingAccountById(2);
+//    
+////     
+//        if (sa == null)
+//            System.out.println("Saving is null");
+//        if (ca == null)
+//            System.out.println("Chequing is null");
+//        else{
+//            System.out.println("Before: Chequing Balance = " + ca.getBalance());
+//             System.out.println("Before: Saving Balance = " + sa.getBalance());
+//             Account.transfer(ca, sa, 1000, "Paying my load");
+//             System.out.println("After: Chequing Balance = " + ca.getBalance());
+//             System.out.println("After: Saving Balance = " + sa.getBalance());
+//        } 
+//        
          
          
     }

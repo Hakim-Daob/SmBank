@@ -11,10 +11,10 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-
 public class UserRole implements Serializable {
-    
+    @Id
     private double userId;
+    @Id
     private double roleId;
 
     public double getUserId() {

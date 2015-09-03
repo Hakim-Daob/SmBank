@@ -1,6 +1,6 @@
 # Smooth Banking
 
-#Overall Description 
+# Overall Description 
  
 Smooth banking is an online banking system which aims to provide the users of a bank 
 continues servers for 24 hours during all the week days.  It allows user to make 
@@ -12,7 +12,7 @@ be able to use smooth banking you have to be a customer of the bank, and
 consequently be registered and provided with an ID and password to access Smooth 
 banking securely from anywhere. 
 
-#  System Interfaces 
+# System Interfaces 
  
 Smooth banking will be interacting with different external system interfaces.  Starting 
 with Paypal which is a reliable Web-based application for the secure transfer of money 
